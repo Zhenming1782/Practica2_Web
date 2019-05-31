@@ -11,7 +11,7 @@ import static spark.Spark.*;
 public class Main {
     public static void main(String[] args) {
 
-        ArrayList<practica2.zhenming.li.Estudiante> estudiantes = new ArrayList<>();
+        ArrayList<Estudiante> estudiantes = new ArrayList<>();
 
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
         configuration.setClassForTemplateLoading(Main.class, "/");
@@ -46,7 +46,7 @@ public class Main {
             String ape = req.queryParams("apellido");
             String tel = req.queryParams("telefono");
 
-            estudiantes.add(new practica2.zhenming.li.Estudiante(mat, nom, ape, tel));
+            estudiantes.add(new Estudiante(mat, nom, ape, tel));
 
             res.redirect("/");
 
@@ -57,10 +57,10 @@ public class Main {
             try {
                 StringWriter wr = new StringWriter();
                 Map<String, Object> att = new HashMap<>();
-                practica2.zhenming.li.Estudiante estudiante = null;
+                Estudiante estudiante = null;
                 Template temp = configuration.getTemplate("templates/estudiante.ftl");
 
-                for (practica2.zhenming.li.Estudiante est : estudiantes) {
+                for (Estudiante est : estudiantes) {
                     if (est.getMatricula() == Integer.parseInt(req.params("matricula"))) {
                         estudiante = est;
                     }
@@ -87,10 +87,10 @@ public class Main {
                 StringWriter wr = new StringWriter();
                 Map<String, Object> att = new HashMap<>();
 
-                practica2.zhenming.li.Estudiante estudiante = null;
+                Estudiante estudiante = null;
                 Template temp = configuration.getTemplate("templates/editar.ftl");
 
-                for (practica2.zhenming.li.Estudiante est : estudiantes) {
+                for (Estudiante est : estudiantes) {
                     if (est.getMatricula() == Integer.parseInt(req.params("matricula"))) {
                         estudiante = est;
                     }
@@ -119,7 +119,7 @@ public class Main {
             String ape = req.queryParams("apellido");
             String tel = req.queryParams("telefono");
 
-            for (practica2.zhenming.li.Estudiante est : estudiantes) {
+            for (Estudiante est : estudiantes) {
                 if (est.getMatricula() == mat) {
                     est.setNombre(nom);
                     est.setApellido(ape);
@@ -137,22 +137,19 @@ public class Main {
                 StringWriter wr = new StringWriter();
                 Map<String, Object> att = new HashMap<>();
 
-                practica2.zhenming.li.Estudiante estudiante = null;
+                Estudiante estudiante = null;
                 Template temp = configuration.getTemplate("templates/borrar.ftl");
 
-                for (practica2.zhenming.li.Estudiante est : estudiantes) {
+                for (Estudiante est : estudiantes) {
                     if (est.getMatricula() == Integer.parseInt(req.params("matricula"))) {
                         estudiante = est;
                     }
                 }
-
                 if (estudiante == null) {
                     throw new Exception();
                 }
-
                 att.put("estudiante", estudiante);
                 temp.process(att, wr);
-
                 return wr;
 
             } catch (Exception error) {
@@ -164,9 +161,9 @@ public class Main {
 
         post("/borrar/:matricula", (req, res) -> {
             int mat = Integer.parseInt(req.params("matricula"));
-            practica2.zhenming.li.Estudiante estudiante = null;
+            Estudiante estudiante = null;
 
-            for (practica2.zhenming.li.Estudiante est : estudiantes) {
+            for (Estudiante est : estudiantes) {
                 if (est.getMatricula() == mat) {
                     estudiante = est;
                 }
