@@ -1,4 +1,3 @@
-package practica2.zhenming.li;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 

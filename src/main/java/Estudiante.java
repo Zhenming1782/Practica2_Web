@@ -1,5 +1,3 @@
-package practica2.zhenming.li;
-
 public class Estudiante {
     private int Matricula;
     private String Nombre;
