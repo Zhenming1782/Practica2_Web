@@ -3,9 +3,8 @@ plugins {
     id 'application'
 }
 
-application {
-    mainClassName = 'Main'
-}
+mainClassName = 'edu.pucmm.Practica2_Web.Main'
+
 
 group 'edu.pucmm'
 version '1.0-SNAPSHOT'
